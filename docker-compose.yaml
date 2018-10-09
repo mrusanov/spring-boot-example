@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: "greeting-schema"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+        - "/root/mysql-data:/var/lib/mysql"
+    ports:
+        - "3306:3306"
+
+  spring-boot-example:
+    depends_on:
+      - mysql
+    image: spring-boot-example:1.0-SNAPSHOT
+    environment:
+      DATASOURCE_URL: "jdbc:mysql://192.168.99.100:3306/greeting-schema?useSSL=false"
+      DATASOURCE_USERNAME: "root"
+      DATASOURCE_PASSWORD: ""
+      DATASOURCE_DRIVER_NAME: "com.mysql.jdbc.Driver"
+      DATASOURCE_DIALECT: "org.hibernate.dialect.MySQL5Dialect"
+      DATASOURCE_DDL_AUTO: "update"
+    ports:
+        - "8080:8080"
