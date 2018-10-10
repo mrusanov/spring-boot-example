@@ -38,7 +38,7 @@ public class GreetingRestControllerTest {
     }
 
     @Test
-    public void testWithMissingPayloadParam() throws Exception {
+    public void testPostAndGetGreetings() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post(POST_GREETING_URI)
                 .content("Hello World!")
                 .header(GREETING_NAME_HEADER, "John"))
