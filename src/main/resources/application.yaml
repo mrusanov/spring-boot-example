@@ -1,11 +1,16 @@
 server.port: 8080
 
-spring.datasource.url: ${DATASOURCE_URL}
-spring.datasource.username: ${DATASOURCE_USERNAME}
-spring.datasource.password: ${DATASOURCE_PASSWORD}
-spring.datasource.driver-class-name: ${DATASOURCE_DRIVER_NAME}
-spring.jpa.properties.hibernate.dialect: ${DATASOURCE_DIALECT}
-spring.jpa.hibernate.ddl-auto: ${DATASOURCE_DDL_AUTO}
+spring:
+  profiles:
+    active: "prod"
+  datasource.url: ${DATASOURCE_URL}
+  datasource.username: ${DATASOURCE_USERNAME}
+  datasource.password: ${DATASOURCE_PASSWORD}
+  datasource.driver-class-name: ${DATASOURCE_DRIVER_NAME}
+  jpa.properties.hibernate.dialect: ${DATASOURCE_DIALECT}
+  jpa.hibernate.ddl-auto: ${DATASOURCE_DDL_AUTO}
+
+---
 
 spring:
   profiles: "test"
