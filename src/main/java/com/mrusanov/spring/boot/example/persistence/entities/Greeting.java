@@ -1,16 +1,8 @@
 package com.mrusanov.spring.boot.example.persistence.entities;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import javax.persistence.*;
+import java.util.Objects;
 
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
 @Entity
 public class Greeting {
 
@@ -36,6 +28,37 @@ public class Greeting {
         super();
         setName(name);
         setMessage(message);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Greeting greeting = (Greeting) o;
+        return Objects.equals(id, greeting.id) &&
+                Objects.equals(name, greeting.name) &&
+                Objects.equals(message, greeting.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, message);
     }
 
 }
